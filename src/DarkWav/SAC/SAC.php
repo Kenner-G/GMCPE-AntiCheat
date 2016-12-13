@@ -140,32 +140,33 @@ public function onCommand(CommandSender $sender, Command $cmd, $label, array $ar
             			$sender->sendMessage(TF::RED . $player->getName() . " has the OP status and thus, cannot be warned.");
             			return;
           		}
-          	if($player === null) {
-            		$sender->sendMessage(TF::RED . "Player " . $name . " could not be found.");
-            		return true;
-          	} else {
-            		unset($args[0]);
-            		$player_name = $player->getName();
-            		if(!(file_exists($this->dataPath() . "Players/" . strtolower($player_name) . ".txt"))) {
-              			touch($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
-              			file_put_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt", "0");
-            		}
-            		$reason = implode(" ", $args);
-            		$file = file_get_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
-           		if($file >= "3") {
-                		if($player->isOP()){
-                  			return;
-                		}
-               			$player->setBanned(true);
-                		$sender->sendMessage(TF::GREEN . $player_name . " was banned for being warned 3+ times.");
-                		return true;
-            		} else {
-              			$player->sendMessage(TF::YELLOW . "You have been warned by " . $sender_name . " for " . $reason);
-              			$this->getServer()->broadcastMessage(TF::YELLOW . $player_name . " was warned by " . $sender_name . " for " . $reason);
-              			$file = file_get_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
-              			file_put_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt", $file + 1);
-              			$sender->sendMessage(TF::GREEN . "Warned " . $player_name . ", and added +1 warns to their file.");
-              			return true;
+          		if($player === null) {
+            			$sender->sendMessage(TF::RED . "Player " . $name . " could not be found.");
+            			return true;
+          		} else {
+            			unset($args[0]);
+            			$player_name = $player->getName();
+            			if(!(file_exists($this->dataPath() . "Players/" . strtolower($player_name) . ".txt"))) {
+              				touch($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
+              				file_put_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt", "0");
+            			}
+            			$reason = implode(" ", $args);
+            			$file = file_get_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
+           			if($file >= "3") {
+                			if($player->isOP()){
+                  				return;
+                			}
+               				$player->setBanned(true);
+                			$sender->sendMessage(TF::GREEN . $player_name . " was banned for being warned 3+ times.");
+                			return true;
+            			} else {
+              				$player->sendMessage(TF::YELLOW . "You have been warned by " . $sender_name . " for " . $reason);
+              				$this->getServer()->broadcastMessage(TF::YELLOW . $player_name . " was warned by " . $sender_name . " for " . $reason);
+              				$file = file_get_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
+              				file_put_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt", $file + 1);
+              				$sender->sendMessage(TF::GREEN . "Warned " . $player_name . ", and added +1 warns to their file.");
+              				return true;
+				}
             		}
           	}
         }
@@ -184,10 +185,11 @@ public function onCommand(CommandSender $sender, Command $cmd, $label, array $ar
             			if(!(file_exists($this->dataPath() . "Players/" . strtolower($player_name) . ".txt"))) {
               				$sender->sendMessage(TF::RED . $player_name . " has no warns.");
               				return true;
-            		} else {
-              			$player_warns = file_get_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
-              			$sender->sendMessage(TF::GREEN . "Player " . $player_name . " has " . $player_warns . " warns.");
-              			return true;
+            			} else {
+              				$player_warns = file_get_contents($this->dataPath() . "Players/" . strtolower($player_name) . ".txt");
+              				$sender->sendMessage(TF::GREEN . "Player " . $player_name . " has " . $player_warns . " warns.");
+              				return true;
+				}
             		}
           	}
         }
