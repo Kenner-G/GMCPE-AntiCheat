@@ -55,27 +55,26 @@ public function onEnable(){
     }
     
     foreach($Server->getOnlinePlayers() as $player){
-      $hash     = spl_object_hash($player);
-      $name     = $player->getName();
-      $oldhash  = null;
-      $observer = null;
-      
-    foreach ($this->PlayerObservers as $key=>$obs){
-		if ($obs->PlayerName == $name){
-          		$oldhash  = $key;
-          		$observer = $obs;
-          		$observer->Player = $player;
-        	}
-      }
-      if ($oldhash != null){
-        unset($this->PlayerObservers[$oldhash]);
-        $this->PlayerObservers[$hash] = $observer;
-        $this->PlayerObservers[$hash]->PlayerRejoin();
-      }else{
-        $observer = new Observer($player, $this);
-        $this->PlayerObservers[$hash] = $observer;
-        $this->PlayerObservers[$hash]->PlayerJoin();      
-      }      
+      	$hash     = spl_object_hash($player);
+      	$name     = $player->getName();
+      	$oldhash  = null;
+      	$observer = null;
+    	foreach ($this->PlayerObservers as $key=>$obs){
+			if ($obs->PlayerName == $name){
+          			$oldhash  = $key;
+          			$observer = $obs;
+          			$observer->Player = $player;
+        		}
+      	}
+      	if ($oldhash != null){
+        	unset($this->PlayerObservers[$oldhash]);
+        	$this->PlayerObservers[$hash] = $observer;
+        	$this->PlayerObservers[$hash]->PlayerRejoin();
+      	}else{
+        	$observer = new Observer($player, $this);
+        	$this->PlayerObservers[$hash] = $observer;
+        	$this->PlayerObservers[$hash]->PlayerJoin();      
+      	}      
 }  
 public function onDisable(){
     $Logger = $this->getServer()->getLogger();
