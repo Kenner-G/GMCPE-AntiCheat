@@ -118,9 +118,10 @@ public function onCommand(CommandSender $sender, Command $cmd, $label, array $ar
             			return true;
           		}else{
             			foreach($this->getServer()->getOnlinePlayers() as $p){
-              			if($p->hasPermission("gmcpe.staff")){
-                			$p->sendMessage(TF::YELLOW . $sender_name . " reported " . $name . " for using hacks and/or mods!");
-             	 		}
+              				if($p->hasPermission("gmcpe.staff")){
+                				$p->sendMessage(TF::YELLOW . $sender_name . " reported " . $name . " for using hacks and/or mods!");
+             	 			}
+				}
             		}
             		$player->sendMessage(TF::YELLOW . $sender_name . " has reported you for using hacks and/or mods!");
             		$sender->sendMessage(TF::GREEN . "The Report has Been Sent to All Online Staffs.");
